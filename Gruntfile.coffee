@@ -21,14 +21,8 @@ module.exports = (grunt) ->
       test: ['spec/*.coffee']
 
     shell:
-      'test-with-native-weakmap':
-        command: 'node --harmony_collections node_modules/jasmine-focused/bin/jasmine-focused --coffee --captureExceptions spec'
-        options:
-          stdout: true
-          stderr: true
-          failOnError: true
-      'test-with-weakmap-module':
-        command: 'node node_modules/jasmine-focused/bin/jasmine-focused --coffee --captureExceptions spec'
+      test:
+        command: 'jasmine-focused --captureExceptions --coffee spec/'
         options:
           stdout: true
           stderr: true
@@ -41,4 +35,4 @@ module.exports = (grunt) ->
   grunt.registerTask 'clean', -> require('rimraf').sync('lib')
   grunt.registerTask('lint', ['coffeelint:src', 'coffeelint:test'])
   grunt.registerTask('default', ['coffeelint', 'coffee'])
-  grunt.registerTask('test', ['lint', 'shell:test-with-native-weakmap', 'shell:test-with-weakmap-module'])
+  grunt.registerTask('test', ['lint', 'shell:test'])
